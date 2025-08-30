@@ -1,4 +1,5 @@
 # 📢 Broadcast Plugin for Minecraft
+**[简体中文](README_zh.md)**
 
 A feature-rich broadcast plugin for Minecraft servers with customizable messages, sound effects, and world-specific broadcasting.
 
