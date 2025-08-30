@@ -1,0 +1,11 @@
+name: BroadcastPlugin
+version: 1.0
+main: org.broadcastplugin.BroadcastPlugin
+api-version: 1.21
+author: 服主
+commands:
+  broadcast:
+    description: 管理广播消息
+    usage: /broadcast <reload|add|list>
+    permission: broadcastplugin.admin
+    permission-message: 你没有权限使用此命令

@@ -1,0 +1,34 @@
+# 广播插件配置 v2.0
+
+# 基础设置
+settings:
+  broadcast-interval: 600  # 广播间隔(秒)，默认10分钟
+  random-order: false      # 是否随机顺序播放消息
+  enable-sound: true       # 是否播放提示音
+  sound-effect: "ENTITY_EXPERIENCE_ORB_PICKUP"  # 提示音类型
+  sound-volume: 1.0        # 音量(0.0-1.0)
+  sound-pitch: 1.5         # 音高(0.5-2.0)
+
+# 消息格式
+formats:
+  prefix: "&a[&6服务器公告&a]"  # 消息前缀
+  suffix: "&7- 感谢您的关注"     # 消息后缀
+  list-format: "&e%d. &f%s"    # 列表消息格式
+  help-header: "&6=== 帮助菜单 ==="
+
+# 消息内容
+messages:
+  - "欢迎加入我们的服务器！输入 /help 查看帮助"
+  - "服务器QQ群：123456789"
+  - "定期活动每周六晚8点举行"
+
+# 世界白名单(空列表表示全服广播)
+enabled-worlds:
+  - "world"
+  - "world_nether"
+
+# 权限控制
+permissions:
+  admin-permission: "broadcast.admin"
+  bypass-cooldown: "broadcast.bypass"
+  command-cooldown: 10  # 命令使用冷却时间(秒)
