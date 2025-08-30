@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id("xyz.jpenilla.run-paper") version "2.3.1"
+    id 'maven-publish'  // 添加 maven-publish 插件
 }
 
 group = 'org'
@@ -18,11 +19,47 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.7-R0.1-SNAPSHOT")
 }
 
+// 发布配置
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            // 添加插件信息
+            groupId = project.group
+            artifactId = project.name
+            version = project.version
+            
+            // 可选：添加源码和javadoc
+            artifact sourcesJar
+            artifact javadocJar
+        }
+    }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = "https://maven.pkg.github.com/${{ github.repository }}"
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+}
+
+// 创建源码jar任务
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    archiveClassifier = 'sources'
+}
+
+// 创建javadoc jar任务
+task javadocJar(type: Jar) {
+    from javadoc
+    archiveClassifier = 'javadoc'
+}
+
 tasks {
     runServer {
-        // Configure the Minecraft version for our task.
-        // This is the only required configuration besides applying the plugin.
-        // Your plugin's jar (or shadowJar if present) will be used automatically.
         minecraftVersion("1.21")
     }
 }
@@ -53,3 +90,6 @@ processResources {
         expand props
     }
 }
+
+// 确保在发布前先构建
+publish.dependsOn build
